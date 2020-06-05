@@ -9,13 +9,6 @@
 #include "ast.h"
 #include "utils.h"
 
-bool ast_is_binary(ast_t *ast)
-{
-  if (ast->type == AST_BINARY)
-    return true;
-
-  return false;
-}
 char *copy_name(char *name)
 {
   size_t len = (strlen(name) + 1);
@@ -249,6 +242,46 @@ char *ast_binary_to_string(ast_binary_e op)
     printf("unknown binary operator. exiting.\n");
     exit(1);
   }
+}
+ast_binary_e string_to_ast_binary(char op)
+{
+  switch (op)
+  {
+  case '+':
+    return AST_BIN_PLUS;
+  case '-':
+    return AST_BIN_MINUS;
+  case '*':
+    return AST_BIN_MULT;
+  case '/':
+    return AST_BIN_DIV;
+  case '&&':
+    return AST_BIN_AND;
+  case '||':
+    return AST_BIN_OR;
+  case '<':
+    return AST_BIN_LT;
+  case '<=':
+    return AST_BIN_LTE;
+  case '>':
+    return AST_BIN_GT;
+  case '>=':
+    return AST_BIN_GTE;
+  case '==':
+    return AST_BIN_EQ;
+  case '!=':
+    return AST_BIN_DIFF;
+  default:
+    printf("unknown binary operator. exiting.\n");
+    exit(1);
+  }
+}
+
+bool ast_is_binary(ast_t *ast)
+{
+  if (ast->type == AST_BINARY)
+    return true;
+  return false;
 }
 
 void print_spaces(size_t n)

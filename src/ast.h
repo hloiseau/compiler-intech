@@ -1,7 +1,6 @@
 #ifndef AST_H
 #define AST_H
 #include "symbol.h"
-#include <stdbool.h>
 
 typedef enum
 {
@@ -121,13 +120,15 @@ ast_t *ast_new_condition(ast_t *condition, ast_t *valid, ast_t *invalid);
 ast_t *ast_new_loop(ast_t *condition, ast_t *stmt);
 ast_t *ast_new_return(ast_t *expr);
 
+bool ast_is_binary(ast_t *ast);
 int ast_binary_priority(ast_t *ast);
+
 ast_list_t *ast_list_new_node(ast_t *elem);
 ast_list_t *ast_list_add(ast_list_t **list, ast_t *elem);
 char *ast_get_var_type(ast_t *ast);
 char *ast_binary_to_string(ast_binary_e op);
+ast_binary_e string_to_ast_binary(char op);
 void ast_print(ast_t *ast);
 void ast_print_binary_or_integer(ast_t *item);
-bool ast_is_binary(ast_t *ast);
 
 #endif /* ifndef AST_H */
